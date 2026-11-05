@@ -1,0 +1,12 @@
+const express = require("express");
+const router = express.Router();
+const { protect, allowRoles } = require("../middleware/auth");
+const c = require("../controllers/medicineController");
+router.use(protect);
+router.get("/low-stock", c.getLowStockMedicines);
+router.get("/expiring", c.getExpiryMedicines);
+router.get("/", c.getMedicines);
+router.post("/", allowRoles("Admin", "Manager", "Pharmacist"), c.createMedicine);
+router.put("/:id", allowRoles("Admin", "Manager", "Pharmacist"), c.updateMedicine);
+router.delete("/:id", allowRoles("Admin", "Manager"), c.deleteMedicine);
+module.exports = router;

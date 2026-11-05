@@ -1,0 +1,14 @@
+const express = require("express");
+const router = express.Router();
+const { protect, allowRoles } = require("../middleware/auth");
+const upload = require("../middleware/upload");
+const users = require("../controllers/userController");
+router.use(protect);
+router.get("/me", users.getMe);
+router.put("/me", users.updateMe);
+router.post("/me/profile-picture", upload, users.uploadPicture);
+router.get("/", allowRoles("Admin"), users.listUsers);
+router.post("/", allowRoles("Admin"), users.createUser);
+router.put("/:id", allowRoles("Admin"), users.updateUser);
+router.delete("/:id", allowRoles("Admin"), users.deleteUser);
+module.exports = router;

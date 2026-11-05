@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Inventory | PharmaKalCare</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">💊</div>
+            <div>
+                <h2>PharmaKalCare</h2><span>Pharmacy management</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav"><a href="dashboard.html">📊 Dashboard</a><a class="active" href="inventory.html">💊
+                Inventory</a><a href="sales.html">💰 Sales</a><a data-roles="Admin,Manager" href="reports.html">📈
+                Reports</a><a data-roles="Admin" href="users.html">👥 Users</a><a href="settings.html">⚙️ Settings</a>
+        </nav>
+        <div class="sidebar-bottom"><button data-logout>Sign out</button></div>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h1>Inventory</h1>
+                <p>Manage medicine stock and expiry dates.</p>
+            </div>
+            <div class="profile">
+                <div class="avatar" data-profile-picture></div>
+                <div class="profile-info"><strong data-user-name></strong><small data-user-role></small></div>
+            </div>
+        </header>
+        <section class="content-card">
+            <h2>Add medicine</h2>
+            <form id="medicineForm" class="medicine-form-grid"><label class="form-group">Name<input name="name" required
+                        maxlength="120"></label><label class="form-group">Quantity<input name="quantity" type="number"
+                        min="0" step="1" required></label><label class="form-group">Unit price<input name="price"
+                        type="number" min="0" step="0.01" required></label><label class="form-group">Expiry date<input
+                        name="expiryDate" type="date" required></label><button class="primary-button">Add
+                    medicine</button></form>
+        </section>
+        <section class="content-card">
+            <div class="section-header">
+                <h2>Medicines</h2><input id="searchInput" placeholder="Search name">
+            </div>
+            <div class="table-wrapper">
+                <table class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Expiry</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTable"></tbody>
+                </table>
+            </div>
+        </section>
+        <p id="message" class="message"></p>
+        <dialog id="editDialog">
+            <form id="editForm" class="auth-form">
+                <h2>Edit medicine</h2><input type="hidden" name="id"><label>Name<input name="name"
+                        required></label><label>Quantity<input name="quantity" type="number" min="0"
+                        required></label><label>Price<input name="price" type="number" min="0" step="0.01"
+                        required></label><label>Expiry date<input name="expiryDate" type="date" required></label>
+                <div class="modal-actions"><button type="button" id="cancelEdit"
+                        class="secondary-button">Cancel</button><button class="primary-button">Save changes</button>
+                </div>
+            </form>
+        </dialog>
+        <script src="../js/common.js"></script>
+        <script src="../js/inventory.js"></script>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>User management | PharmaKalCare</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">💊</div>
+            <div>
+                <h2>PharmaKalCare</h2><span>Pharmacy management</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav"><a href="dashboard.html">📊 Dashboard</a><a href="inventory.html">💊 Inventory</a><a
+                href="sales.html">💰 Sales</a><a data-roles="Admin,Manager" href="reports.html">📈 Reports</a><a
+                class="active" data-roles="Admin" href="users.html">👥 Users</a><a href="settings.html">⚙️ Settings</a>
+        </nav>
+        <div class="sidebar-bottom"><button data-logout>Sign out</button></div>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h1>User management</h1>
+                <p>Only administrators can manage account roles.</p>
+            </div>
+            <div class="profile">
+                <div class="avatar" data-profile-picture></div>
+                <div class="profile-info"><strong data-user-name></strong><small data-user-role></small></div>
+            </div>
+        </header>
+        <section class="content-card">
+            <h2>Create account</h2>
+            <form id="createUser" class="medicine-form-grid"><label class="form-group">Name<input name="name"
+                        required></label><label class="form-group">Email<input name="email" type="email"
+                        required></label><label class="form-group">Temporary password<input name="password"
+                        type="password" minlength="8" required></label><label class="form-group">Role<select
+                        name="role">
+                        <option>Cashier</option>
+                        <option>Pharmacist</option>
+                        <option>Manager</option>
+                        <option>Admin</option>
+                    </select></label><button class="primary-button">Create user</button></form>
+        </section>
+        <section class="content-card">
+            <h2>Team accounts</h2>
+            <div class="table-wrapper">
+                <table class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTable"></tbody>
+                </table>
+            </div>
+        </section>
+        <p id="message" class="message"></p>
+        <script src="../js/common.js"></script>
+        <script src="../js/users.js"></script>
+    </main>
+</body>
+
+</html>

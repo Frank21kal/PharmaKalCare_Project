@@ -1,0 +1,14 @@
+const user = requireAuth();
+const table = document.getElementById("inventoryTable"), message = document.getElementById("message"), dialog = document.getElementById("editDialog"), form = document.getElementById("editForm");
+let medicines = [];
+if (user) { load(); if (user.role === "Cashier") document.getElementById("medicineForm").remove(); }
+async function load(search="") { try { medicines=await api(`/medicines?search=${encodeURIComponent(search)}`); render(); } catch(e){showMessage(message,e.message,true);} }
+function render(){ table.replaceChildren(); if(!medicines.length){const tr=document.createElement("tr"),td=document.createElement("td");td.colSpan=5;td.textContent="No medicines found.";tr.append(td);table.append(tr);return;}
+ for(const m of medicines){const tr=document.createElement("tr"); for(const value of [m.name,m.quantity,Number(m.price).toFixed(2),new Date(m.expiryDate).toLocaleDateString()]){const td=document.createElement("td");td.textContent=value;tr.append(td);} const action=document.createElement("td"); if(["Admin","Manager","Pharmacist"].includes(user.role)){const edit=document.createElement("button");edit.textContent="Edit";edit.onclick=()=>openEdit(m);action.append(edit);} if(["Admin","Manager"].includes(user.role)){const del=document.createElement("button");del.textContent="Delete";del.onclick=()=>removeMedicine(m._id);action.append(del);}tr.append(action);table.append(tr);}}
+document.getElementById("searchInput").addEventListener("input",e=>load(e.target.value));
+document.getElementById("medicineForm")?.addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget;const data=Object.fromEntries(new FormData(form));data.quantity=Number(data.quantity);data.price=Number(data.price);try{await api("/medicines",{method:"POST",body:JSON.stringify(data)});form.reset();await load();showMessage(message,"Medicine added.");}catch(err){showMessage(message,err.message,true);}});
+function openEdit(m){for(const key of ["name","quantity","price"])form.elements[key].value=m[key];form.elements.expiryDate.value=new Date(m.expiryDate).toISOString().slice(0,10);form.elements.id.value=m._id;dialog.showModal();}
+document.getElementById("cancelEdit").onclick=()=>dialog.close();
+form.addEventListener("submit",async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(form));const id=d.id;delete d.id;d.quantity=Number(d.quantity);d.price=Number(d.price);try{await api(`/medicines/${id}`,{method:"PUT",body:JSON.stringify(d)});dialog.close();await load();showMessage(message,"Medicine updated.");}catch(err){showMessage(message,err.message,true);}});
+async function removeMedicine(id){if(!confirm("Delete this medicine?"))return;try{await api(`/medicines/${id}`,{method:"DELETE"});await load();showMessage(message,"Medicine deleted.");}catch(e){showMessage(message,e.message,true);}}
+

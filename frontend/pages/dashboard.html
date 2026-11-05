@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard | PharmaKalCare</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">💊</div>
+      <div>
+        <h2>PharmaKalCare</h2><span>Pharmacy management</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="active" href="dashboard.html"><span>▦</span> Dashboard</a>
+      <a href="inventory.html"><span>✚</span> Inventory</a>
+      <a href="sales.html"><span>◉</span> Sales</a>
+      <a data-roles="Admin,Manager" href="reports.html"><span>↗</span> Reports</a>
+      <a data-roles="Admin" href="users.html"><span>♙</span> Users</a>
+      <a href="settings.html"><span>⚙</span> Settings</a>
+    </nav>
+    <div class="sidebar-bottom"><button data-logout>Sign out</button></div>
+  </aside>
+  <main class="main-content">
+    <header class="topbar">
+      <div><span class="eyebrow">PHARMACY OVERVIEW</span>
+        <h1>Dashboard</h1>
+        <p>Welcome back, <strong data-user-name></strong></p>
+      </div>
+      <div class="profile">
+        <div class="avatar" data-profile-picture></div>
+        <div class="profile-info"><strong data-user-name></strong><small data-user-role></small></div>
+      </div>
+    </header>
+    <section class="inventory-summary" data-dashboard-stats hidden aria-label="Business summary">
+      <article class="summary-card">
+        <div><span>Total medicines</span><strong id="totalMedicines">-</strong></div>
+      </article>
+      <article class="summary-card">
+        <div><span>Sales</span><strong id="totalSales">-</strong></div>
+      </article>
+      <article class="summary-card">
+        <div><span>Revenue</span><strong id="revenue">-</strong></div>
+      </article>
+      <article class="summary-card">
+        <div><span>Low stock items</span><strong id="lowStock">-</strong></div>
+      </article>
+    </section>
+    <div class="dashboard-grid">
+      <section class="content-card dashboard-section">
+        <div class="card-heading"><span class="section-icon warning">!</span>
+          <div>
+            <h2>Low stock</h2>
+            <p>Medicines with fewer than 10 units</p>
+          </div>
+        </div>
+        <div id="lowStockList" class="dashboard-list"></div>
+      </section>
+      <section class="content-card dashboard-section">
+        <div class="card-heading"><span class="section-icon mint">◷</span>
+          <div>
+            <h2>Expiring soon</h2>
+            <p>Expiry dates within the next 30 days</p>
+          </div>
+        </div>
+        <div id="expiryList" class="dashboard-list"></div>
+      </section>
+      <section class="content-card dashboard-section">
+        <div class="card-heading"><span class="section-icon lavender">↗</span>
+          <div>
+            <h2>Top selling medicines</h2>
+            <p>Most units sold</p>
+          </div>
+        </div>
+        <ol id="topMedicinesList" class="ranked-list"></ol>
+      </section>
+      <section class="content-card dashboard-section recent-sales">
+        <div class="card-heading"><span class="section-icon mint">◉</span>
+          <div>
+            <h2>Recent sales</h2>
+            <p>Latest completed transactions</p>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="inventory-table">
+            <thead>
+              <tr>
+                <th>Medicine</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th>Sold by</th>
+              </tr>
+            </thead>
+            <tbody id="salesTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+    <p id="message" class="message" role="status"></p>
+  </main>
+  <script src="../js/common.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Reports | PharmaKalCare</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">💊</div>
+            <div>
+                <h2>PharmaKalCare</h2><span>Pharmacy management</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav"><a href="dashboard.html">📊 Dashboard</a><a href="inventory.html">💊 Inventory</a><a
+                href="sales.html">💰 Sales</a><a class="active" data-roles="Admin,Manager" href="reports.html">📈
+                Reports</a><a data-roles="Admin" href="users.html">👥 Users</a><a href="settings.html">⚙️ Settings</a>
+        </nav>
+        <div class="sidebar-bottom"><button data-logout>Sign out</button></div>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h1>Reports</h1>
+                <p>Sales performance for a selected date range.</p>
+            </div>
+            <div class="profile">
+                <div class="avatar" data-profile-picture></div>
+                <div class="profile-info"><strong data-user-name></strong><small data-user-role></small></div>
+            </div>
+        </header>
+        <section class="content-card">
+            <form id="filterForm" class="medicine-form-grid"><label class="form-group">From<input name="from"
+                        type="date" required></label><label class="form-group">Through<input name="to" type="date"
+                        required></label><button class="primary-button">Run report</button></form>
+        </section>
+        <section class="inventory-summary">
+            <article class="summary-card">
+                <div><span>Transactions</span><strong id="transactions">-</strong></div>
+            </article>
+            <article class="summary-card">
+                <div><span>Units sold</span><strong id="units">-</strong></div>
+            </article>
+            <article class="summary-card">
+                <div><span>Revenue</span><strong id="revenue">-</strong></div>
+            </article>
+            <article class="summary-card">
+                <div><span>Low-stock medicines</span><strong id="lowStock">-</strong></div>
+            </article>
+        </section>
+        <section class="content-card">
+            <h2>Top medicines</h2>
+            <ol id="topList"></ol>
+        </section>
+        <p id="message" class="message"></p>
+        <script src="../js/common.js"></script>
+        <script src="../js/reports.js"></script>
+    </main>
+</body>
+
+</html>
