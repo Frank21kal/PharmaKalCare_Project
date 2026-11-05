@@ -19,6 +19,9 @@ This is an updated working copy of the local PharmaKalCare project. The original
 
 The API defaults to port 5000. The browser client uses `http://localhost:5000/api`; a deployment can set `window.API_BASE_URL` before `common.js` is loaded.
 
+
+https://frank21kal.github.io/PharmaKalCare_Project/
+
 ## Included areas
 
 - Authenticated, role-gated API routes for inventory, sales, dashboard, users, and reports.
