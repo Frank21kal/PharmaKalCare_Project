@@ -1,4 +1,4 @@
-# PharmaKalCare updated project
+# PharmaKalCare project
 
 This is an updated working copy of the local PharmaKalCare project. The original folder has not been changed. No credentials from the source `.env` were copied.
 
